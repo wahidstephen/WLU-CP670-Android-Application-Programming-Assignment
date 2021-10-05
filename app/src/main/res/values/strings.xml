@@ -1,11 +1,19 @@
 <resources>
-    <string name="app_name">AndroidAssignments</string>
+    <string name="app_name" translatable="false">AndroidAssignments</string>
     <string name="hello_message">Hello World!</string>
     <string name="ButtonText">I\’m a button</string>
 
     <string name="loginButtonText">Login</string>
-    <string name="loginEmailText">login name</string>
+    <string name="loginEmailText" translatable="false">login email</string>
     <string name="loginPasswordText">password</string>
 
     <string name="switchBtnText">What does this do?</string>
+
+    <string name="preference_name" translatable="false">my_shared_preferences</string>
+    <string name="preference_key_profile_email" translatable="false">DefaultEmail</string>
+
+    <string name="dialog_message">Are you sure you want to exit the activity?</string>
+    <string name="dialog_title" translatable="false">Exit the screen</string>
+    <string name="ok">Yes, please</string>
+    <string name="cancel">No, keep me here</string>
 </resources>

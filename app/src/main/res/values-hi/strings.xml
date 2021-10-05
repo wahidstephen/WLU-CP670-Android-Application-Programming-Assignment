@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AndroidAssignments</string>
     <string name="hello_message">Namaste!</string>
     <string name="ButtonText">Mai ek button hoon</string>
 
     <string name="loginButtonText">Login</string>
-    <string name="loginEmailText">login naam</string>
     <string name="loginPasswordText">Kunjika</string>
 
     <string name="switchBtnText">Yeh kya karta hai?</string>
+
+    <string name="dialog_message">क्या आप वाकई स्क्रीन से बाहर निकलना चाहते हैं?</string>
+    <string name="ok">जी हां, जरूर</string>
+    <string name="cancel">नहीं, मुझे यहीं रखो</string>
 </resources>
