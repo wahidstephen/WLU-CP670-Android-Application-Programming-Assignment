@@ -16,4 +16,7 @@
     <string name="dialog_title" translatable="false">Exit the screen</string>
     <string name="ok">Yes, please</string>
     <string name="cancel">No, keep me here</string>
+
+    <string name="ChatBtnText">Start Chat</string>
+    <string name="sendBtnText">Send</string>
 </resources>
