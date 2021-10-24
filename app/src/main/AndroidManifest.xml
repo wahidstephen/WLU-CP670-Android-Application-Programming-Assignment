@@ -13,17 +13,32 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidAssignments">
+        <activity
+            android:name=".TestToolbar"
+            android:label="@string/title_activity_test_toolbar"
+            android:theme="@style/Theme.AndroidAssignments.NoActionBar"></activity>
+
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" />
-        <activity android:name=".MainActivity" android:parentActivityName=".MainActivity" />
-        <activity android:name=".ChatWindow" android:parentActivityName=".MainActivity" />
-        <activity android:name=".ListItemsActivity" android:parentActivityName=".MainActivity" />
-        <activity android:name=".LoginActivity" android:parentActivityName=".MainActivity">
+
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ChatWindow"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ListItemsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:parentActivityName=".MainActivity">
         </activity>
     </application>
 

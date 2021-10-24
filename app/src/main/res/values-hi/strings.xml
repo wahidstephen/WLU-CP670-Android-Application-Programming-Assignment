@@ -14,4 +14,7 @@
 
     <string name="ChatBtnText">बातचीत शुरू कीजिए</string>
     <string name="sendBtnText">भेजें</string>
+
+    <string name="toolbar_activity_btn_text">टेस्ट टूलबार</string>
+    <string name="message_box_hint">नया संदेश</string>
 </resources>

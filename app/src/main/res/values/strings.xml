@@ -14,9 +14,22 @@
 
     <string name="dialog_message">Are you sure you want to exit the activity?</string>
     <string name="dialog_title" translatable="false">Exit the screen</string>
-    <string name="ok">Yes, please</string>
-    <string name="cancel">No, keep me here</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
     <string name="ChatBtnText">Start Chat</string>
     <string name="sendBtnText">Send</string>
+    <string name="title_activity_test_toolbar" translatable="false">TestToolbar</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
+
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+
+    <string name="toolbar_activity_btn_text">Test Toolbar</string>
+
+    <string name="message_box_hint">New message</string>
 </resources>
