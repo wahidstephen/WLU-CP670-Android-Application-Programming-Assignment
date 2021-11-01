@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,12 +23,13 @@ import java.util.ArrayList;
 
 public class ChatWindow extends AppCompatActivity {
 
-    protected static final String ACTIVITY_NAME = "CHatWindow";
+    protected static final String ACTIVITY_NAME = "ChatWindow";
 
     ListView listView;
     EditText textInput;
     Button sendButton;
     ArrayList<String> messages = new ArrayList<>();
+    ChatDatabaseHelper dbHelper;
 
     private class ChatAdapter extends ArrayAdapter<String> {
 
@@ -67,6 +71,24 @@ public class ChatWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
 
+        dbHelper = new ChatDatabaseHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + ChatDatabaseHelper.TABLE_MESSAGES;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            String message = cursor.getString( cursor.getColumnIndex(ChatDatabaseHelper.KEY_MESSAGE) );
+            Log.i(ACTIVITY_NAME, "SQL MESSAGE:" +  message);
+            messages.add(message);
+            cursor.moveToNext();
+        }
+        Log.i(ACTIVITY_NAME, "Cursor's column count = " + cursor.getColumnCount() );
+        for (int i = 0; i < cursor.getColumnCount(); i++)
+            Log.i(ACTIVITY_NAME, "Cursor's column name = " + cursor.getColumnName(i) );
+        cursor.close();
+
         listView = (ListView) findViewById(R.id.chatView);
         textInput = (EditText) findViewById(R.id.chatText);
         sendButton = (Button) findViewById(R.id.sendBtn);
@@ -80,10 +102,19 @@ public class ChatWindow extends AppCompatActivity {
                 // Do something in response to button click
                 Log.i(ACTIVITY_NAME, "User clicked Start Chat");
                 messages.add(textInput.getText().toString());
+                ContentValues values = new ContentValues();
+                values.put(ChatDatabaseHelper.KEY_MESSAGE, textInput.getText().toString());
+                db.insert(ChatDatabaseHelper.TABLE_MESSAGES, null, values);
                 messageAdapter.notifyDataSetChanged(); // this restarts the process of getCount()/getView()
                 textInput.setText("");
             }
         });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        dbHelper.close();
+        super.onDestroy();
     }
 }
