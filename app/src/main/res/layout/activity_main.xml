@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
 
     <Button
         android:id="@+id/button_transition"
@@ -27,8 +28,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintVertical_bias="0.1" />
 
     <Button
         android:id="@+id/button_transition2"
@@ -39,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_transition"
+        app:layout_constraintTop_toBottomOf="@id/button_transition"
         app:layout_constraintVertical_bias="0.2" />
 
     <Button
@@ -51,7 +52,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_transition"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintTop_toBottomOf="@id/button_transition2"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/button_transition4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weather_forecast_activity_btn_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_transition3"
+        app:layout_constraintVertical_bias="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

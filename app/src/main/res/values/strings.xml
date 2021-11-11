@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">AndroidAssignments</string>
     <string name="hello_message">Hello World!</string>
-    <string name="ButtonText">I\’m a button</string>
+    <string name="ButtonText">I’m a button</string>
 
     <string name="loginButtonText">Login</string>
     <string name="loginEmailText" translatable="false">login email</string>
@@ -32,4 +32,21 @@
     <string name="toolbar_activity_btn_text">Test Toolbar</string>
 
     <string name="message_box_hint">New message</string>
+
+    <string name="weather_forecast_activity_btn_text">Test Weather Forecast</string>
+
+    <string-array name="cities_list">
+        <item>Ottawa</item>
+        <item>Toronto</item>
+        <item>Halifax</item>
+        <item>Vancouver</item>
+        <item>Quebec</item>
+        <item>Calgary</item>
+        <item>Winnipeg</item>
+        <item>Charlottetown</item>
+        <item>Montreal</item>
+        <item>Victoria</item>
+        <item>Saskatoon</item>
+    </string-array>
+
 </resources>

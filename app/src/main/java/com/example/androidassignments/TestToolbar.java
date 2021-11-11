@@ -1,5 +1,6 @@
 package com.example.androidassignments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -119,6 +120,13 @@ public class TestToolbar extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Activity.RESULT_CANCELED);
+        finish();
     }
 
 }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -116,5 +117,12 @@ public class ChatWindow extends AppCompatActivity {
     protected void onDestroy() {
         dbHelper.close();
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Activity.RESULT_CANCELED);
+        finish();
     }
 }

@@ -3,6 +3,7 @@ package com.example.androidassignments;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -80,6 +81,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button weatherForecastActivityButton = (Button) findViewById(R.id.button_transition4);
+        weatherForecastActivityButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Do something in response to button click
+                Log.i(ACTIVITY_NAME, "User clicked Test Weather Forecast");
+                Intent intent = new Intent(MainActivity.this, WeatherForecast.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -91,5 +102,12 @@ public class MainActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(this, messagePassed, Toast.LENGTH_LONG); // this is the MainActivity
             toast.show(); // display your message box
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Activity.RESULT_CANCELED);
+        finish();
     }
 }

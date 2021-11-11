@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WeatherForecast"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/weather_image_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        />
+    <Spinner
+        android:id="@+id/city_list_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/weather_image_view"
+        android:entries="@array/cities_list" />
+    <TextView
+        android:id="@+id/current_temp_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/max_temp_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/current_temp_field"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="20sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/min_temp_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/max_temp_field"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="20sp"/>
+    
+    <ProgressBar
+        android:id="@+id/weather_api_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:visibility="invisible"
+        />
+
+</RelativeLayout>
