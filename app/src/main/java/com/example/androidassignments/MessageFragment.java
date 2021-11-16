@@ -39,14 +39,12 @@ public class MessageFragment extends Fragment {
             ((TextView) view.findViewById(R.id.message_text_view)).setText(bundle.getString("message_string"));
             Button deleteButton = (Button) view.findViewById(R.id.delete_message);
 
-            deleteButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    // Do something in response to button click
-                    Intent data = new Intent();
-                    data.putExtra("database_id", bundle.getLong("database_id"));
-                    getActivity().setResult(Activity.RESULT_OK, data);
-//                    getActivity().finish();
-                }
+            deleteButton.setOnClickListener(v -> {
+                // Do something in response to button click
+                Intent data = new Intent();
+                data.putExtra("database_id", bundle.getLong("database_id"));
+                getActivity().setResult(200, data);
+                getActivity().finish();
             });
         }
         return view;

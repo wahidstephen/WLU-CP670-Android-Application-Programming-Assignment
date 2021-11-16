@@ -115,17 +115,6 @@ public class ChatWindow extends AppCompatActivity {
         messageAdapter = new ChatAdapter( this );
         listView.setAdapter(messageAdapter);
 
-        Bundle detailsBundle;
-
-        if ((detailsBundle = getIntent().getExtras()) != null) {
-            if (detailsBundle.getInt("resultCode") == 420) {
-                Long messageId = detailsBundle.getLong("database_id");
-                db = dbHelper.getWritableDatabase();
-                db.delete(ChatDatabaseHelper.TABLE_MESSAGES, ChatDatabaseHelper.KEY_ID + "=?", new String[]{ String.valueOf(messageId)} );
-                messageAdapter.notifyDataSetChanged(); // this restarts the process of getCount()/getView()
-            }
-        }
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -134,7 +123,7 @@ public class ChatWindow extends AppCompatActivity {
                     Intent intent = new Intent(ChatWindow.this, MessageDetails.class);
                     intent.putExtra("database_id", messageAdapter.getItemId(position));
                     intent.putExtra("message_string", messageAdapter.getItem(position));
-                    startActivity(intent);
+                    startActivityForResult(intent, 100);
                 }
                 else {
                     MessageFragment messageFragment = new MessageFragment(ChatWindow.this);
@@ -168,12 +157,14 @@ public class ChatWindow extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
+
+        if (resultCode == 200){
             Bundle extras = data.getExtras();
-            String messageId = extras.getString("database_id");
+            String messageId = String.valueOf(extras.get("database_id"));
             db = dbHelper.getWritableDatabase();
             db.delete(ChatDatabaseHelper.TABLE_MESSAGES, ChatDatabaseHelper.KEY_ID + "=?", new String[]{ messageId } );
             messageAdapter.notifyDataSetChanged(); // this restarts the process of getCount()/getView()
+
         }
     }
 
@@ -190,5 +181,11 @@ public class ChatWindow extends AppCompatActivity {
         super.onBackPressed();
         setResult(Activity.RESULT_CANCELED);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        messageAdapter.notifyDataSetChanged();
     }
 }

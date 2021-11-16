@@ -25,14 +25,18 @@ public class MessageDetails extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            Intent intent = new Intent(MessageDetails.this, ChatWindow.class);
-            intent.putExtra("resultCode", 420);
-            intent.putExtras(data);
-            startActivity(intent);
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == Activity.RESULT_OK) {
+////            Intent intent = new Intent(MessageDetails.this, ChatWindow.class);
+////            intent.putExtra("resultCode", 420);
+////            intent.putExtras(data);
+////            startActivity(intent);
+////            Intent intent = new Intent();
+////            intent.putExtra("resultCode", 420);
+////            setResult(200, data);
+////            finish();
+//        }
+//    }
 }
