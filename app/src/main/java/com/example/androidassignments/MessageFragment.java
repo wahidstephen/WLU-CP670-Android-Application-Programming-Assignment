@@ -17,6 +17,7 @@ import android.widget.TextView;
 public class MessageFragment extends Fragment {
 
     ChatWindow chatActivity;
+    TextView messageID, messageText;
 
     public MessageFragment(ChatWindow chatActivity) {
         // Required empty public constructor
@@ -33,19 +34,31 @@ public class MessageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_message, container, false);
+        messageID = (TextView) view.findViewById(R.id.message_id_view);
+        messageText = (TextView) view.findViewById(R.id.message_text_view);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            ((TextView) view.findViewById(R.id.message_id_view)).setText(Long.toString(bundle.getLong("database_id")));
-            ((TextView) view.findViewById(R.id.message_text_view)).setText(bundle.getString("message_string"));
+            Long messageId = bundle.getLong("database_id");
+            String message = bundle.getString("message_string");
+            messageID.setText(String.valueOf(messageId));
+            messageText.setText(message);
             Button deleteButton = (Button) view.findViewById(R.id.delete_message);
+            deleteButton.setVisibility(View.VISIBLE);
 
-            deleteButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    // Do something in response to button click
+            deleteButton.setOnClickListener((View v) -> {
+                // Do something in response to button click
+                if (chatActivity == null) {
                     Intent data = new Intent();
-                    data.putExtra("database_id", bundle.getLong("database_id"));
-                    getActivity().setResult(Activity.RESULT_OK, data);
-//                    getActivity().finish();
+                    data.putExtra("database_id", messageId);
+                    data.putExtra("message_string", message);
+                    getActivity().setResult(200, data);
+                    getActivity().finish();
+                }
+                else {
+                    chatActivity.deleteMessages(messageId, message);
+                    messageID.setText("");
+                    messageText.setText("");
+                    deleteButton.setVisibility(View.INVISIBLE);
                 }
             });
         }

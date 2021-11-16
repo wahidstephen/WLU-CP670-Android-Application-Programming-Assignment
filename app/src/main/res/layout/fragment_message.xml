@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:gravity="right"
         android:hint="MessageHere"
         />
 
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:gravity="right"
         android:hint="ID+"
         />
 

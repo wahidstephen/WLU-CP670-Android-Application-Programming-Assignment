@@ -36,7 +36,7 @@ public class ChatWindow extends AppCompatActivity {
     ListView listView;
     EditText textInput;
     Button sendButton;
-    ArrayList<String> messages = new ArrayList<>();
+    ArrayList<String> messages = new ArrayList<String>();
     ChatAdapter messageAdapter;
     ChatDatabaseHelper dbHelper;
     SQLiteDatabase db;
@@ -83,6 +83,15 @@ public class ChatWindow extends AppCompatActivity {
         }
     }
 
+    public void deleteMessages(Long messageId, String message) {
+        db = dbHelper.getWritableDatabase();
+        messages.remove(message);
+        Log.i(ACTIVITY_NAME, "Deleting message" + message);
+        db.delete(ChatDatabaseHelper.TABLE_MESSAGES, ChatDatabaseHelper.KEY_ID + "=?", new String[]{ String.valueOf(messageId) } );
+        messageAdapter.notifyDataSetChanged(); // this restarts the process of getCount()/getView()
+        cursor.requery();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,17 +124,6 @@ public class ChatWindow extends AppCompatActivity {
         messageAdapter = new ChatAdapter( this );
         listView.setAdapter(messageAdapter);
 
-        Bundle detailsBundle;
-
-        if ((detailsBundle = getIntent().getExtras()) != null) {
-            if (detailsBundle.getInt("resultCode") == 420) {
-                Long messageId = detailsBundle.getLong("database_id");
-                db = dbHelper.getWritableDatabase();
-                db.delete(ChatDatabaseHelper.TABLE_MESSAGES, ChatDatabaseHelper.KEY_ID + "=?", new String[]{ String.valueOf(messageId)} );
-                messageAdapter.notifyDataSetChanged(); // this restarts the process of getCount()/getView()
-            }
-        }
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -134,7 +132,7 @@ public class ChatWindow extends AppCompatActivity {
                     Intent intent = new Intent(ChatWindow.this, MessageDetails.class);
                     intent.putExtra("database_id", messageAdapter.getItemId(position));
                     intent.putExtra("message_string", messageAdapter.getItem(position));
-                    startActivity(intent);
+                    startActivityForResult(intent, 100);
                 }
                 else {
                     MessageFragment messageFragment = new MessageFragment(ChatWindow.this);
@@ -143,7 +141,7 @@ public class ChatWindow extends AppCompatActivity {
                     args.putString("message_string", messageAdapter.getItem(position));
                     messageFragment.setArguments(args);   // (1) Communicate with Fragment using Bundle
                     FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction(); // begin FragmentTransaction
-                    ft2.add(R.id.messageView, messageFragment);     // add Fragment
+                    ft2.replace(R.id.messageView, messageFragment);     // add Fragment
                     ft2.commit();                                  // commit FragmentTransaction
                 }
             }
@@ -168,12 +166,18 @@ public class ChatWindow extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
+
+        if (resultCode == 200){
             Bundle extras = data.getExtras();
-            String messageId = extras.getString("database_id");
-            db = dbHelper.getWritableDatabase();
-            db.delete(ChatDatabaseHelper.TABLE_MESSAGES, ChatDatabaseHelper.KEY_ID + "=?", new String[]{ messageId } );
-            messageAdapter.notifyDataSetChanged(); // this restarts the process of getCount()/getView()
+            Long messageId = extras.getLong("database_id");
+            String message = extras.getString("message_string");
+            deleteMessages(messageId, message);
+//            db = dbHelper.getWritableDatabase();
+//            messages.remove(message);
+//            Log.i(ACTIVITY_NAME, "Deleting message" + message);
+//            db.delete(ChatDatabaseHelper.TABLE_MESSAGES, ChatDatabaseHelper.KEY_ID + "=?", new String[]{ messageId } );
+//            messageAdapter.notifyDataSetChanged(); // this restarts the process of getCount()/getView()
+//            cursor.requery();
         }
     }
 
@@ -190,5 +194,12 @@ public class ChatWindow extends AppCompatActivity {
         super.onBackPressed();
         setResult(Activity.RESULT_CANCELED);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        messageAdapter.notifyDataSetChanged();
+
     }
 }
