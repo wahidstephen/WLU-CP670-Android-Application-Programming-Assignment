@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidAssignments">
+        <activity android:name=".MessageDetails"></activity>
 
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
@@ -26,9 +27,8 @@
         <activity
             android:name=".TestToolbar"
             android:label="@string/title_activity_test_toolbar"
-            android:theme="@style/Theme.AndroidAssignments.NoActionBar"
-            android:parentActivityName=".MainActivity" />
-
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AndroidAssignments.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:parentActivityName=".MainActivity" />
